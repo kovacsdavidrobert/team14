@@ -62,6 +62,7 @@ else document.write(`${kor}: Helytelen életkor`);
 
 document.write("<br><br>Feladat 5<hr>");
 /*
+5. feladat:
 Készíts egy olyan kódot, mely paraméterként bekér egy számot és egy osztót és kiírja szövegesen,
 hogy az adott osztó, osztja-e az egész számot, úgy, hogy a maradék nulla.
 */
