@@ -30,3 +30,10 @@ for(let i = 0;i < tomb.length;i++){
    }
 }
 document.write(`Páros: ${paros}db`);
+
+document.write("<br><br>Kiválogatás:<hr>");
+for(let i = 0;i < tomb.length;i++){
+   if(tomb[i]%2==0){
+     document.write(`${tomb[i]}, `);     
+   }
+}
