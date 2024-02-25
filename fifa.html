@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+    FIFA
+    </title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>FIFA kalkulátor</h1>
+      <p>A ranglistán szereplők száma: <span id="hanyan"></span></p>
+      <button onclick="RanglistanHanyanDOM(document.getElementById('hanyan'))">Mutat</button>
+      <hr>
+      <p>Átlagpontszám: <span id="atPont"></span></p>
+      <button onclick="AtlagPontszamDOM(document.getElementById('atPont'))">Mutat</button>
+      <hr>
+      <p>Kik teljesítettek átlagon felül?</p>
+      <table id="atFelul"></table>
+      <button onclick="AtlagFelettListaDOM(document.getElementById('atFelul'))">Mutat</button>
+      <hr>
+      <p>A legtöbbet javító:</p>
+      <table id="legtJav"></table>
+      <button onclick="LegtobbetJavitoDOM(document.getElementById('legtJav'))">Mutat</button>
+      <hr>
+      <p>Megtalálható e a következő csapat: </p>
+      <input onchange="MegtalalhatoEDOM(this.value, document.getElementById('megtalalhato'))"
+      onkeyup="MegtalalhatoEDOM(this.value, document.getElementById('megtalalhato'))" type="text" />
+      <span id="megtalalhato">Nem</span>
+      <hr>
+      <p>Pontváltozás statisztika:</p>
+      <button onclick="ValtozasStatisztikaDOM(document.getElementById('stati'))">Mutat</button>
+      <ul id="stati"></ul>
+      <hr>
+    </div>
+  <script type="text/javascript">
+//1. érték: Csapat neve (nev)
+//2. érték: Csapat helyezése (helyezes)
+//3. érték: Csapat helyének változása (valtozas)
+//4. érték: Csapat Pontszama (pont)
+
+const csapatAdat = [
+"Anglia;4;0;1662", 
+"Argentína;10;0;1614", 
+"Belgium;1;0;1752", 
+"Brazília;3;-1;1719", 
+"Chile;17;-3;1576", 
+"Dánia;14;-1;1584", 
+"Franciaország;2;1;1725", 
+"Hollandia;13;3;1586", 
+"Horvátország;8;-1;1625", 
+"Kolumbia;9;-1;1622", 
+"Mexikó;12;0;1603", 
+"Németország;16;-1;1580", 
+"Olaszország;15;1;1583", 
+"Peru;19;0;1551", 
+"Portugália;5;1;1643", 
+"Spanyolország;7;2;1631", 
+"Svájc;11;0;1604", 
+"Svédország;18;0;1560", 
+"Szenegál;20;0;1546", 
+"Uruguay;6;-1;1639"
+];
+
+  function RanglistanHanyanDOM(span) {
+  	span.innerHTML = fifa.length;
+  }
+  function AtlagPontszamDOM(span) {
+  	span.innerHTML = AtlagPontszam(fifa);
+  }
+
+  function AtlagFelettListaDOM(table) {
+  	ObjTombTablazatbaKiir(AtlagonFeluli(fifa), table);
+  	
+  }
+  
+  function LegtobbetJavitoDOM(table) {
+  	ObjTombTablazatbaKiir(LegtobbetJavito(fifa), table);
+  }
+  
+  function MegtalalhatoEDOM(csapat, span) {
+  	span.innerHTML = MegtalalhatoE(fifa, csapat) ? "Igen" : "Nem";
+  }
+  
+  function ValtozasStatisztikaDOM(ul) {
+  	ValtozasStatisztikaEljaras(fifa, ul)
+  }
+  
+  function PontosvesszosSztringTombbolObjektumtombot(stringTomb) {
+    var objTomb = [];
+    var obj = {};
+    var tmp;
+    for (let i = 0; i < stringTomb.length; i++) {
+      obj = {};
+      tmp = stringTomb[i].split(';');
+      obj.nev = tmp[0];
+      obj.helyezes = Number(tmp[1]);
+      obj.valtozas = Number(tmp[2]);
+      obj.pont = Number(tmp[3]);
+      objTomb.push(obj);
+    }
+    return objTomb;
+  }
+
+  var fifa = PontosvesszosSztringTombbolObjektumtombot(csapatAdat);
+
+  //LOPTAM A SZORGALMI FELADATOKBÓL, OTT ÍRTAM, EZT FOGOM ITT IS HASZNALNI:
+  function ObjTombTablazatbaKiir(objArr, table) {
+    var keys = Object.keys(objArr[0]);
+    var out = "";
+    out += '<tr><th>';
+    out += keys.join('</th><th>');
+    out += '</th></tr>';
+    for (let i = 0; i < objArr.length; i++) {
+      out += '<tr>';
+      for (let j = 0; j < keys.length; j++) {
+        out += '<td>' + objArr[i][keys[j]] + '</td>';
+      }
+      out += '</tr>';
+      table.innerHTML = out;
+    }
+
+  }
+
+  function AtlagPontszam(objArr) {
+    var szumma = 0;
+    for (let i = 0; i < objArr.length; i++) {
+      szumma += objArr[i].pont;
+    }
+    return Math.round((szumma/objArr.length)*100)/100;
+  }
+
+  function AtlagonFeluli(objArr) {
+    var felul = [];
+    for (let i = 0; i < objArr.length; i++) {
+      if(objArr[i].pont > AtlagPontszam(objArr)){
+        felul.push(objArr[i]);
+      }
+    }
+    return felul;
+  }
+  
+
+  function LegtobbetJavito(objArr) {
+    var max = objArr[0].valtozas;
+    var maxIndex = 0;
+    for (let i = 0; i < objArr.length; i++) {
+      if(max < objArr[i].valtozas){
+        max = objArr[i].valtozas;
+        maxIndex = i;
+      } 
+    }
+    return [objArr[maxIndex]];
+  }
+
+
+
+  function MegtalalhatoE(objArr, orszag) {
+    for (let i = 0; i < objArr.length; i++) {
+      if(objArr[i].nev == orszag)return true;
+    }
+    return false;
+  }
+    
+  function ValtozasStatisztikaEljaras(objArr, ul) {
+    var out = "";
+    var valtozasok = [];
+    var tmp = 0;
+    for (let i = 0; i < objArr.length; i++) {
+      if(!valtozasok.includes(objArr[i].valtozas)){
+        valtozasok.push(objArr[i].valtozas);
+      }
+    }
+    valtozasok = valtozasok.sort();
+    for (let i = 0; i < valtozasok.length; i++){
+      tmp = 0;
+      for (let j = 0; j < objArr.length; j++) {
+        if(valtozasok[i] == objArr[j].valtozas) tmp++;
+      }
+      if(tmp>1){
+        out += "<li>" + valtozasok[i] +": ";
+        out += tmp + 'db csapat</li>';
+        ul.innerHTML = out;
+      }
+    }
+  }
+
+  </script>
+  </body>
+</html>
