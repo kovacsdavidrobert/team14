@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+      DOM feladatsor
+    </title>
+    <style type="text/css">
+      section{
+        display: none;
+      }
+      @keyframes rejt {
+      	from { opacity: 1; }
+      	to { opacity: 0; }
+      }
+      @keyframes mutat {
+      	from { opacity: 0; }
+      	to { opacity: 1; }
+      }
+      .elbujik{
+        animation: rejt 5s forwards;
+      }
+      .elojon{
+        animation: mutat 5s forwards;
+      }
+      #uzenet{
+        position: fixed;
+        top: 2rem;
+        left: 50%;
+        display: none;
+        text-align: center;
+        transform: translateX(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <button onclick="FeladatotMutat(this)" data-feladatot-mutat="1">
+        Feladat 1
+      </button>
+      <button onclick="FeladatotMutat(this)" data-feladatot-mutat="2">
+        Feladat 2
+      </button>
+      <button onclick="FeladatotMutat(this)" data-feladatot-mutat="3">
+        Feladat 3
+      </button>
+      <button onclick="FeladatotMutat(this)" data-feladatot-mutat="4">
+        Feladat 4
+      </button>
+    </header>
+    <section data-feladat="1">
+      <h3>
+        Első feladat:
+      </h3>
+      <p>
+        Készítsen egy beviteli mezőt, mellette egy egyszerű bekezdéssel, amihez rendelje
+        a
+        „karakterszam”
+        azonosítót, oldja meg, hogy a beviteli mezőben bevitt karakterek mennyiségét,
+        interaktívan, azonnal
+        jelenítse meg a beviteli mező mellett, függvény segítségével.
+      </p>
+      <input type="text" onkeyup="karakterSzamlal(this)" />
+      <p id="karakterszam">
+      </p>
+      <hr>
+    </section>
+    
+    <section data-feladat="2">
+      <h3>
+        Második feladat:
+      </h3>
+      <p>
+        Készítsen 2 beviteli mezőt x és y koordinátákkal, és egy kirajzol gombot.
+        (A
+        weboldal szélére)
+        Oldja meg hogy a beviteli mezők alapján, ha az alatta lévő kirajzol gombra kattintunk
+        a képernyő egy
+        tetszőleges pontján rajzoljon ki, az input adatoknak megfelelő négyzetet.
+        Alapértelmezett X és Y érték is alapértelmezetten 100-100 legyen!
+      </p>
+      X: <input type="number" value="100" id="Xkoord" /><br>
+      Y: <input type="number" value="100" id="Ykoord" /><br>
+      <button onclick="negyzetetRajzol(ID('Xkoord').value, ID('Ykoord').value)">Kirajzol</button>      
+    </section>
+
+    <section data-feladat="3">
+      <h3>
+        Harmadik feladat:
+      </h3>
+      <p>
+        Készíts egy gombot, illetve egy képet valahova a weboldaladra (használd a mellékelt: „hidingCat.jpg”
+        képet), old meg, hogy a gombra való kattintáskor, a képed elhalványodjon (5mp alatt, egyszerű
+        animációval), ha ismételten rákattintunk a gombra akkor pedig fordítva történjen ez és a kép
+        fokozatosan jelenjen meg...
+      </p>
+      <img id="cicakep" src="hidingCat.jpg" alt="cica" />
+      <button onclick="cicaOsztaly(ID('cicakep'));">Cicagomb</button>      
+    </section>
+
+    <section data-feladat="4">
+      <h3>
+        Negyedik feladat:
+      </h3>
+      <p>
+        Készíts két beviteli mezőt, e-mail cím és e-mail megerősítése címkével, illetve egy ellenőrzés gombot.
+        Valamint egy dobozt az oldal tetején, ami alapnak nem látszódik, ide fogunk hibaüzeneteket írni.
+        Ha az ellenőrzés gombra kattintunk az alábbi esetekre figyelmeztessen az oldal tetején levő üzenő
+        rész (a mező háttérszíne, az üzenetnek megfelelő színű legyen).
+      </p>
+      <p id='uzenet'></p>
+      <label for="email1">Email cím:</label><br />
+      <input type="email" id="email1" /><br />
+      <label for="email1">Email cím megerősítése:</label><br />
+      <input type="email" id="email2" /><br />
+      <button onclick="emailEllenor(ID('email1'),ID('email2'))">Ellenőrzés</button>      
+    </section>
+    <script type="text/javascript">
+      // Második feladahoz:
+      var negyzet;
+      //Feladatok mutatása (0. feladat):
+      function FeladatotMutat(but) {
+        var feladatSzekciok = document.querySelectorAll('[data-feladat]');
+      	for (let i = 0;i < feladatSzekciok.length;i++) {
+      		if (feladatSzekciok[i].dataset.feladat == but.dataset.feladatotMutat) {
+      			feladatSzekciok[i].style.display = 'block';
+      		}
+      		else {
+      			feladatSzekciok[i].style.display = 'none';
+      		}
+      	}
+        try{negyzet.remove();}
+        catch (err) {console.log('nincs Négyzet');}
+      }
+
+      //Első feladat:
+      function karakterSzamlal(inputObject) {
+        ID('karakterszam').innerHTML = inputObject.value.length;
+      }
+      
+      //Második feladat:
+      function negyzetetRajzol(X,Y) {
+        try{negyzet.remove();}
+        catch (err) {console.log('nincs Négyzet');}
+      	negyzet = document.createElement('div');
+      	negyzet.style.position = 'fixed';
+      	negyzet.style.top = Y + 'px';
+      	negyzet.style.left = X + 'px';
+      	negyzet.style.width = '50px';
+      	negyzet.style.height = '50px';
+      	negyzet.style.backgroundColor = 'red';
+      	document.body.appendChild(negyzet);
+      	
+      }
+      
+      //Harmadik:
+      function cicaOsztaly(kep) {
+      	if(kep.classList.contains('elbujik')){
+      	  kep.classList.add('elojon');
+      	  kep.classList.remove('elbujik');
+      	}
+      	else {
+      	  kep.classList.remove('elojon');
+      	  kep.classList.add('elbujik');      		
+      	}
+      }
+      
+      //4.:
+      function emailEllenor(cim1, cim2) {
+        var uzenet = ID('uzenet');
+        uzenet.style.display = "none";
+      	if (cim1.value.length == 0 && cim2.value.length == 0) {
+      		uzenet.innerHTML = "Nincs kitöltve egyik mező sem!";
+      		uzenet.style.backgroundColor = 'tomato';
+      		uzenet.style.display = "block";
+      	}
+      	else if (cim1.value.length == 0) {
+      		uzenet.innerHTML = "Nincs kitöltve az email mező!";
+      		uzenet.style.backgroundColor = 'tomato';
+      		uzenet.style.display = "block";
+      	}
+      	else if (cim2.value.length == 0) {
+      		uzenet.innerHTML = "Nincs kitöltve a megerősítő mező!";
+      		uzenet.style.backgroundColor = 'tomato';
+      		uzenet.style.display = "block";
+      	}
+      	else if (!cim1.value.match(/^[0-9a-z\.-]+@([0-9a-z-]+\.)+[a-z]{2,4}$/i)) {
+      		uzenet.innerHTML = "Nem megfelelő az email cím formátuma!";
+      		uzenet.style.backgroundColor = 'tomato';
+      		uzenet.style.display = "block";
+      	}
+      	else if (cim1.value != cim2.value) {
+      		uzenet.innerHTML = "Nem egyezik a két cím!";
+      		uzenet.style.backgroundColor = 'tomato';
+      		uzenet.style.display = "block";
+      	}
+      	else {
+      		uzenet.innerHTML = "Adatok rögzítése sikeres!";
+      		uzenet.style.backgroundColor = 'lightgreen';
+      		uzenet.style.display = "block";
+      	}
+      }
+      
+      //-1. feladat :D
+      function ID(id) {
+      	return document.getElementById(id);
+      }
+    </script>
+  </body>
+</html>
