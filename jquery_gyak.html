@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Gyakorlás
+    </title>
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <h3>1. Feladat</h3>
+    <p>Készíts a korábban tanultak alapján egy div elemet megjelenítő, illetve elrejtő gombot.</p>
+    <button id="feladat1gomb">Megjelenít</button>
+    <div id="feladat1div">slideDown() függvénnyel<br>megjelenő<br>keret</div>
+  
+    <h3>2. Feladat</h3>
+    <p>Készítsd el a korábban tanultak alapján egy mezőt, illetve mellé egy bekezdést, és jelenítsd
+       meg a bekezdésben, a mezőbe beírt karakterek számát. <mark>[<q>(on)input</q>-ot használtam]</mark></p>
+    <input type="text" id="feladat2input" placeholder="Írj be szöveget!" />
+    <p>Karakterek száma: <span id="feladat2darabszam">0</span></p>
+
+
+    <h3>3. Feladat</h3>
+    <p>Készítsetek egy input mezőt és oldjátok meg egy gombnyomás segítségével, hogy a benn lévő
+       adatok rejtve/megjelenítve legyenek gombnyomásra
+       (mint a jelszó elrejtése/megjelenítése DOM feladat esetén!)
+    </p>
+    <input type="text" id="feladat3input" /><button id="feladat3rejt">Rejt</button>
+
+
+    <h3>4. Feladat</h3>
+    <p>Készítsetek egy input mezőt és annak függvényében, hogy mi a mezőbe írt érték, jelenjen
+       meg a víz egy adott állapota. (folyékony, szilárd, légnemű)
+    </p>
+    <p>H<sub>2</sub>O hőmérséklete = <input type="number" id="feladat4viz" />°C </p>
+    <img src="water.jpg" alt="H2O" id="feledat4kep" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      $( document ).ready(function() {
+        //Feladat 1:
+        $('#feladat1div').hide().css('background-color', 'yellow').css('text-align', 'center');
+        
+        $('#feladat1gomb').click(() => {
+          $('#feladat1div').slideDown();
+        });
+        
+        
+        //Feladat 2:
+        $('#feladat2input').on('input', () => {
+          $('#feladat2darabszam').text($('#feladat2input').val().length);
+        });
+        
+        
+        //Feladat 3:
+        $('#feladat3rejt').click(() => {
+          if($('#feladat3input').attr('type') == 'text'){
+            $('#feladat3input').attr('type', 'password');
+            $('#feladat3rejt').text('Mutat');
+          }
+          else {
+          	$('#feladat3input').attr('type', 'text');
+            $('#feladat3rejt').text('Rejt');
+          }
+        });
+        
+        
+        //Feladat 4:
+        $('#feledat4kep').hide();
+        $('#feledat4kep').css('width', '300px');
+        
+        $('#feladat4viz').on('input', () => {
+          if ($('#feladat4viz').val().length &&$('#feladat4viz').val() != '-') {
+            if(Number($('#feladat4viz').val()) < 0){
+              $('#feledat4kep').attr('src', 'ice.jpg');
+              $('#feledat4kep').attr('title', "Jég");
+              $('#feladat4viz').css('background-color', "lightblue");
+              $('#feledat4kep').show();
+            }
+            else if(Number($('#feladat4viz').val()) < 100){
+              $('#feledat4kep').attr('src', 'water.jpg');
+              $('#feledat4kep').attr('title', "Folyékony víz");
+              $('#feladat4viz').css('background-color', "lightgreen");
+              $('#feledat4kep').show();
+            }
+            else if(Number($('#feladat4viz').val()) >= 100) {
+            	$('#feledat4kep').attr('src', 'steam.jpg');
+            	$('#feledat4kep').attr('title', "Gőz");
+            	$('#feladat4viz').css('background-color', "orange");
+            	$('#feledat4kep').show();
+            }
+            else {
+            	$('#feledat4kep').hide();
+            }
+          }
+          else {
+          	$('#feledat4kep').hide();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
