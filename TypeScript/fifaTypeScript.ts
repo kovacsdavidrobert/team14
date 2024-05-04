@@ -123,7 +123,7 @@ interface FifaAdat {
 
 
   function ValtozasStatisztikaEljaras(objArr:FifaAdat[]):void {
-    var valtozasok = [];
+    var valtozasok:number[] = [];
     var tmp:number = 0;
     for (let i = 0; i < objArr.length; i++) {
       if(!valtozasok.includes(objArr[i].valtozas)){
