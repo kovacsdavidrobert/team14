@@ -183,7 +183,8 @@ function JavitottKiegeszitettStringTombbotCsinalok(oldHelsinki:string[]):string[
         if(ujHelsinki[i].split(' ')[0] == '4') olimpiaiPont = 3;
         if(ujHelsinki[i].split(' ')[0] == '5') olimpiaiPont = 2;
         if(ujHelsinki[i].split(' ')[0] == '6') olimpiaiPont = 1;
-        ujHelsinki[i] = olimpiaiPont.toString() + ' ' + ujHelsinki[i];
+        ujHelsinki[i] =  ujHelsinki[i].split(' ')[0] + ' ' + ujHelsinki[i].split(' ')[1] +
+          ' ' + olimpiaiPont.toString()+ ' ' + ujHelsinki[i].split(' ')[2] + ' ' + ujHelsinki[i].split(' ')[3] ;
     }
     return ujHelsinki;
 }
