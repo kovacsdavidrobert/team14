@@ -52,7 +52,7 @@ interface FifaAdat {
 
   var fifa = PontosvesszosSztringTombbolObjektumtombot(csapatAdat);
 
-  document.write(`A ranglistán szereplők száma: <b>${fifa.length}</b> csapat.<hr>`);
+  console.log(`A ranglistán szereplők száma: <b>${fifa.length}</b> csapat.<hr>`);
 
   function AtlagPontszam(objArr:FifaAdat[]):number {
     var szumma = 0;
@@ -61,23 +61,23 @@ interface FifaAdat {
     }
     return Math.round((szumma/objArr.length)*100)/100;
   }
-  document.write(`A ranglistán szereplők átlagpontszáma: <b>${AtlagPontszam(fifa)}</b> pont.<hr>`);
+  console.log(`A ranglistán szereplők átlagpontszáma: <b>${AtlagPontszam(fifa)}</b> pont.<hr>`);
 
   function ObjTombTablazatbaKiir(objArr:FifaAdat[]):void {
     var keys:string[] = Object.keys(objArr[0]);
 
-    document.write('<table>');
-    document.write('<tr><th>');
-    document.write(keys.join('</th><th>'));
-    document.write('</th></tr>');
+    console.log('<table>');
+    console.log('<tr><th>');
+    console.log(keys.join('</th><th>'));
+    console.log('</th></tr>');
     for (let i = 0; i < objArr.length; i++) {
-      document.write('<tr>');
+      console.log('<tr>');
       for (let j = 0; j < keys.length; j++) {
-        document.write('<td>' + objArr[i][keys[j]] + '</td>');
+        console.log('<td>' + objArr[i][keys[j]] + '</td>');
       }
-      document.write('</tr>');
+      console.log('</tr>');
     }
-    document.write('</table>');
+    console.log('</table>');
   }
 
   function AtlagonFeluli(objArr:FifaAdat[]):FifaAdat[] {
@@ -89,9 +89,9 @@ interface FifaAdat {
     }
     return felul;
   }
-  document.write(`Átlafon felüliek:<br>`);
+  console.log(`Átlafon felüliek:<br>`);
   ObjTombTablazatbaKiir(AtlagonFeluli(fifa));
-  document.write(`<hr>`);
+  console.log(`<hr>`);
 
   function LegtobbetJavito(objArr:FifaAdat[]):[FifaAdat] {
     var max:number = objArr[0].valtozas;
@@ -104,9 +104,9 @@ interface FifaAdat {
     }
     return [objArr[maxIndex]];
   }
-  document.write(`Legtöbbet javított:<br>`);
+  console.log(`Legtöbbet javított:<br>`);
   ObjTombTablazatbaKiir(LegtobbetJavito(fifa));
-  document.write(`<hr>`);
+  console.log(`<hr>`);
 
 
   function MegtalalhatoE(objArr:FifaAdat[], orszag:string):boolean {
@@ -115,10 +115,10 @@ interface FifaAdat {
     }
     return false;
   }
-  document.write(`Magyarország ott van e: (true/false):
+  console.log(`Magyarország ott van e: (true/false):
   <b>${MegtalalhatoE(fifa, "Magyarország")}</b><hr>`);
 
-  document.write(`Chile ott van e: (true/false):
+  console.log(`Chile ott van e: (true/false):
   <b>${MegtalalhatoE(fifa, "Chile")}</b><hr>`);
 
 
@@ -137,10 +137,10 @@ interface FifaAdat {
         if(valtozasok[i] == objArr[j].valtozas) tmp++;
       }
       if(tmp>1){
-        document.write(valtozasok[i] +": ");
-        document.write(tmp + 'db csapat<br>');
+        console.log(valtozasok[i] +": ");
+        console.log(tmp + 'db csapat<br>');
       }
     }
   }
-  document.write(`Változás statisztika:<br>`);
+  console.log(`Változás statisztika:<br>`);
   ValtozasStatisztikaEljaras(fifa);
