@@ -40,7 +40,7 @@ function PontosvesszosSztringTombbolObjektumtombot(stringTomb) {
     return objTomb;
 }
 var fifa = PontosvesszosSztringTombbolObjektumtombot(csapatAdat);
-document.write("A ranglist\u00E1n szerepl\u0151k sz\u00E1ma: <b>".concat(fifa.length, "</b> csapat.<hr>"));
+console.log("A ranglist\u00E1n szerepl\u0151k sz\u00E1ma: <b>".concat(fifa.length, "</b> csapat.<hr>"));
 function AtlagPontszam(objArr) {
     var szumma = 0;
     for (var i = 0; i < objArr.length; i++) {
@@ -48,21 +48,21 @@ function AtlagPontszam(objArr) {
     }
     return Math.round((szumma / objArr.length) * 100) / 100;
 }
-document.write("A ranglist\u00E1n szerepl\u0151k \u00E1tlagpontsz\u00E1ma: <b>".concat(AtlagPontszam(fifa), "</b> pont.<hr>"));
+console.log("A ranglist\u00E1n szerepl\u0151k \u00E1tlagpontsz\u00E1ma: <b>".concat(AtlagPontszam(fifa), "</b> pont.<hr>"));
 function ObjTombTablazatbaKiir(objArr) {
     var keys = Object.keys(objArr[0]);
-    document.write('<table>');
-    document.write('<tr><th>');
-    document.write(keys.join('</th><th>'));
-    document.write('</th></tr>');
+    console.log('<table>');
+    console.log('<tr><th>');
+    console.log(keys.join('</th><th>'));
+    console.log('</th></tr>');
     for (var i = 0; i < objArr.length; i++) {
-        document.write('<tr>');
+        console.log('<tr>');
         for (var j = 0; j < keys.length; j++) {
-            document.write('<td>' + objArr[i][keys[j]] + '</td>');
+            console.log('<td>' + objArr[i][keys[j]] + '</td>');
         }
-        document.write('</tr>');
+        console.log('</tr>');
     }
-    document.write('</table>');
+    console.log('</table>');
 }
 function AtlagonFeluli(objArr) {
     var felul = [];
@@ -73,9 +73,9 @@ function AtlagonFeluli(objArr) {
     }
     return felul;
 }
-document.write("\u00C1tlafon fel\u00FCliek:<br>");
+console.log("\u00C1tlafon fel\u00FCliek:<br>");
 ObjTombTablazatbaKiir(AtlagonFeluli(fifa));
-document.write("<hr>");
+console.log("<hr>");
 function LegtobbetJavito(objArr) {
     var max = objArr[0].valtozas;
     var maxIndex = 0;
@@ -87,9 +87,9 @@ function LegtobbetJavito(objArr) {
     }
     return [objArr[maxIndex]];
 }
-document.write("Legt\u00F6bbet jav\u00EDtott:<br>");
+console.log("Legt\u00F6bbet jav\u00EDtott:<br>");
 ObjTombTablazatbaKiir(LegtobbetJavito(fifa));
-document.write("<hr>");
+console.log("<hr>");
 function MegtalalhatoE(objArr, orszag) {
     for (var i = 0; i < objArr.length; i++) {
         if (objArr[i].nev == orszag)
@@ -97,8 +97,8 @@ function MegtalalhatoE(objArr, orszag) {
     }
     return false;
 }
-document.write("Magyarorsz\u00E1g ott van e: (true/false):\n  <b>".concat(MegtalalhatoE(fifa, "Magyarország"), "</b><hr>"));
-document.write("Chile ott van e: (true/false):\n  <b>".concat(MegtalalhatoE(fifa, "Chile"), "</b><hr>"));
+console.log("Magyarorsz\u00E1g ott van e: (true/false):\n  <b>".concat(MegtalalhatoE(fifa, "Magyarország"), "</b><hr>"));
+console.log("Chile ott van e: (true/false):\n  <b>".concat(MegtalalhatoE(fifa, "Chile"), "</b><hr>"));
 function ValtozasStatisztikaEljaras(objArr) {
     var valtozasok = [];
     var tmp = 0;
@@ -115,10 +115,10 @@ function ValtozasStatisztikaEljaras(objArr) {
                 tmp++;
         }
         if (tmp > 1) {
-            document.write(valtozasok[i] + ": ");
-            document.write(tmp + 'db csapat<br>');
+            console.log(valtozasok[i] + ": ");
+            console.log(tmp + 'db csapat<br>');
         }
     }
 }
-document.write("V\u00E1ltoz\u00E1s statisztika:<br>");
+console.log("V\u00E1ltoz\u00E1s statisztika:<br>");
 ValtozasStatisztikaEljaras(fifa);
