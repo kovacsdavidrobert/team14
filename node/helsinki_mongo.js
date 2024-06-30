@@ -92,7 +92,7 @@ const helsinkiAdatok = adatFeltolto(eredmenyek);
 //1.feladat:
 
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb+srv://kdr:Jelszo88@cluster0.gmyioqu.mongodb.net/";
+const url = "mongodb+srv://kdr:+++++@cluster0.gmyioqu.mongodb.net/";
 
 function Letrehozas(kollekcio){
     MongoClient.connect(url)
