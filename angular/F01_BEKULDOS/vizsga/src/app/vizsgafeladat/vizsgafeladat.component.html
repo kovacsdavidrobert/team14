@@ -1,0 +1,38 @@
+<h1 class="m-2">Angular vizsgafeladat megoldása</h1>
+
+<div class="form-group m-2">
+    <label for="htmlMod">HTML modul pontszáma:</label>
+    <input type="number" id="htmlMod" class="form-control" [(ngModel)]="htmlModul">
+</div>
+
+<div class="form-group m-2">
+    <label for="bootMod">Bootstrap modul pontszáma:</label>
+    <input type="number" id="bootMod" class="form-control" [(ngModel)]="bootModul">
+</div>
+
+<div class="form-group m-2">
+    <label for="jsMod">JavaScript modul pontszáma:</label>
+    <input type="number" id="jsMod" class="form-control" [(ngModel)]="jsModul">
+</div>
+
+<div class="form-group m-2">
+    <label for="tsMod">TypeScript modul pontszáma:</label>
+    <input type="number" id="tslMod" class="form-control" [(ngModel)]="tsModul">
+</div>
+
+<div class="form-group m-2">
+    <label for="ngMod">Angular modul pontszáma:</label>
+    <input type="number" id="ngMod" class="form-control" [(ngModel)]="ngModul">
+</div>
+
+<div class="form-group m-2">
+    <label for="nodeMod">Szerver modul pontszáma:</label>
+    <input type="number" id="nodeMod" class="form-control" [(ngModel)]="nodeModul">
+</div>
+<button class="btn btn-success w-100" (click)="mentes()">Eredmény mentése</button>
+<p>A vizsgán szerzett pontok összege: {{getSum()}}</p>
+<ul>
+    <li *ngFor="let sor of eredmenyek">
+      {{sor}}
+    </li>
+</ul>
