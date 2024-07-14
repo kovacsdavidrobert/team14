@@ -23,12 +23,12 @@ export class VizsgafeladatComponent {
            this.nodeModul) || 0;
   }
   mentes():void{
-    if(String(this.htmlModul).length == 0 || 
-       String(this.bootModul).length == 0 ||
-       String(this.jsModul).length == 0 ||
-       String(this.tsModul).length == 0 ||
-       String(this.ngModul).length == 0 ||
-       String(this.nodeModul).length == 0){
+    if(isNaN(this.htmlModul) || 
+       isNaN(this.bootModul) ||
+       isNaN(this.jsModul) ||
+       isNaN(this.tsModul) ||
+       isNaN(this.ngModul) ||
+       isNaN(this.nodeModul)){
          alert('Az összes mező kitöltése kötelező!');
          return;
       }
