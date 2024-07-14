@@ -1,0 +1,11 @@
+<label for="suly">Add meg a súlyod kg-ban:</label>
+<input id="suly" type="text" class="form-control" [(ngModel)]="megadottSuly" (input)="szamol()">
+
+<label for="magassag">Add meg a magasságod méterben:</label>
+<input type="text" id="magassag" class="form-control" [(ngModel)]="megadottMagassag" (input)="szamol()">
+<button class="btn bg-success w-100 text-light my-2" (click)="EredmenyMentes()">
+    Eredmény mentése
+</button>
+<p>Testömegindex: {{tti}}</p>
+<p>Lista:</p>
+<ul><li *ngFor="let adat of adatok">{{adat}}</li></ul>

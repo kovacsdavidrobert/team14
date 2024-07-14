@@ -1,0 +1,7 @@
+<h1>Loggoló</h1>
+<input type="text" class="form-control" [(ngModel)]="ujTermek">
+<button (click)="hozzaad()">Hozzáad</button>
+
+<ul><li *ngFor="let termek of lista">
+    {{termek}}
+</li></ul>
