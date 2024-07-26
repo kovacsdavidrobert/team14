@@ -1,0 +1,66 @@
+<div class="border p-2 m-1 bg-light">
+    <h3>Új jelölt feltöltése:</h3>
+    <table class="table w-100 text-center">
+        <tr>
+            <th>Körzet</th>
+            <th>Szavazat</th>
+            <th>Név</th>
+            <th>Párt</th>
+        </tr>
+        <tr>
+            <td>
+                <input class="form-control w-100" placeholder="Adja meg a körzetet" type="number"
+                    [(ngModel)]="ujJelolt.korzet">
+            </td>
+            <td>
+                <input class="form-control w-100" type="number" placeholder="Adja meg a szavazatszámot"
+                    [(ngModel)]="ujJelolt.szavazat">
+            </td>
+            <td>
+                <input class="form-control w-100" type="text" placeholder="A jelölt neve" [(ngModel)]="ujJelolt.nev">
+            </td>
+            <td>
+                <input class="form-control w-100" type="text" placeholder="A jelölt pártja" [(ngModel)]="ujJelolt.part">
+            </td>
+        </tr>
+    </table>
+    <button class="btn btn-primary w-100" (click)="JeloltHozzaadasa()">
+        Új jelölt hozzáadása
+    </button>
+</div>
+<div class="border p-2 m-1 bg-light">
+    <h3>Szűrés:</h3>
+    <div class="form-group">
+        <label for="nk">Keresett jelölt neve</label>
+        <input type="text" class="form-control" id="nk" [(ngModel)]="keresNev">
+        <small class="form-text text-muted">A jelölt neve, vagy annak részlete. Ha nem akar szűrni, hagyja
+            üresen!</small>
+    </div>
+    <div class="form-group">
+        <label for="pk">Keresett párt neve</label>
+        <input type="text" class="form-control" id="pk" [(ngModel)]="keresPart">
+        <small class="form-text text-muted">A párt neve, vagy annak részlete. Ha nem akar szűrni, hagyja üresen!</small>
+    </div>
+</div>
+<div class="border p-2 m-1 bg-light">
+    <h3>Jelöltek:</h3>
+    <table class="table table-light table-hover w-100">
+        <thead>
+            <tr>
+                <th>Körzet</th>
+                <th>Szavazatok száma</th>
+                <th>Jelölt neve</th>
+                <th>Jelölt pártja</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let jelolt of szavazatokSzurt">
+            <tr>
+                <td>{{jelolt.korzet}}</td>
+                <td>{{jelolt.szavazat}}</td>
+                <td>{{jelolt.nev}}</td>
+                <td>{{jelolt.part}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
