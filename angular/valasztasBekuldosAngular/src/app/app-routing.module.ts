@@ -4,7 +4,7 @@ import { FooldalComponent } from './fooldal/fooldal.component';
 
 const routes: Routes = [
   {path: "fooldal", component: FooldalComponent},
-  {path: "", redirectTo: "/fooldal", pathMatch:"full"},
+  {path: "", redirectTo: "/fooldal", pathMatch:"full"},//jobb az átirányítás, bár a SEO-t megbolondíthatja :)
   {path: "**", redirectTo: "/fooldal", pathMatch:"full"}
 ];
 
