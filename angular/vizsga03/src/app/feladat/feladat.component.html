@@ -1,0 +1,10 @@
+<h1>Vizsgafeladat</h1>
+<div class="form-group">
+    <label for="vszam">Vizsgálandó szám</label>
+    <input type="number" class="form-control" id="vszam" [(ngModel)]="vizsgaltSzam">
+</div>
+<button class="btn btn-primary w-100" (click)="EredmenyMentes()">Eredmény mentése</button>
+<p>{{aktualisEredmeny}}</p>
+<ul *ngFor="let ertek of eredmenyek">
+    <li>{{ertek}}</li>
+</ul>
